@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -14,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     
     let eggCookingMinutes: [String: Int] = [
-        "Soft": 5,
+        "Soft": 1,
         "Medium": 7,
         "Hard": 12,
     ]
@@ -24,6 +25,8 @@ class ViewController: UIViewController {
     var countdownTimer: Timer?
     var secondsRemaining = 0
     var timePassed = 0
+    
+    var audioPlayer = AVAudioPlayer()
     
     @IBAction func cookEggAction(_ sender: UIButton) {
             
@@ -49,6 +52,7 @@ class ViewController: UIViewController {
            } else {
                countdownTimer?.invalidate()
                timerLabel.text = "Done"
+               playSound(fileName: "alarm_sound")
            }
        }
     
@@ -61,6 +65,21 @@ class ViewController: UIViewController {
         let secondsTimeInterval: TimeInterval = TimeInterval(seconds)
         
         return formatter.string(from: secondsTimeInterval) ?? "0"
+    }
+
+    
+    func playSound(fileName: String){
+        guard let sound = Bundle.main.path(forResource: fileName, ofType: "mp3") else {
+            print("Error getting the mp3 file from the main bundle.")
+            return
+        }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default )
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound))
+        } catch {
+            print("Audio file error.")
+        }
+        audioPlayer.play()
     }
     
 }
