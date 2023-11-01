@@ -128,10 +128,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J4P-wO-qO7">
+                                                <rect key="frame" x="16" y="149" width="342" height="4"/>
+                                            </progressView>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="J4P-wO-qO7" secondAttribute="trailing" constant="16" id="DEo-9N-9Uu"/>
                                             <constraint firstItem="xbJ-es-Oma" firstAttribute="centerY" secondItem="nJN-th-c5K" secondAttribute="centerY" id="cZx-WR-hLh"/>
                                             <constraint firstItem="xbJ-es-Oma" firstAttribute="centerX" secondItem="nJN-th-c5K" secondAttribute="centerX" id="hja-MQ-KGa"/>
+                                            <constraint firstItem="J4P-wO-qO7" firstAttribute="leading" secondItem="nJN-th-c5K" secondAttribute="leading" constant="16" id="l0K-us-v58"/>
+                                            <constraint firstItem="J4P-wO-qO7" firstAttribute="top" secondItem="xbJ-es-Oma" secondAttribute="bottom" constant="16" id="wXE-j7-hMr"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -147,6 +153,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressBar" destination="J4P-wO-qO7" id="k81-8D-iLK"/>
                         <outlet property="timerLabel" destination="xbJ-es-Oma" id="1YI-VY-vzj"/>
                     </connections>
                 </viewController>

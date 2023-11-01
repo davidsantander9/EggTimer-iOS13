@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
     let eggCookingMinutes: [String: Int] = [
         "Soft": 5,
@@ -25,30 +26,26 @@ class ViewController: UIViewController {
     var timePassed = 0
     
     @IBAction func cookEggAction(_ sender: UIButton) {
+            
         let hardness = sender.currentTitle
-        
         secondsRemaining = seconds * eggCookingMinutes[hardness ?? "Soft"]!
         
         timePassed = 0
-        
         countdownTimer?.invalidate()
-        
         startTimer()
-        
-        print(getFormatTimer(seconds: secondsRemaining))
     }
     
     func startTimer(){
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in self?.updateTimer()}
     }
+
     
     @objc func updateTimer() {
-
            // Increment the time passed
-
            timePassed += 1
            if timePassed < secondsRemaining {
                timerLabel.text = getFormatTimer(seconds: secondsRemaining - timePassed)
+               progressBar.progress = Float(timePassed) / Float(secondsRemaining)
            } else {
                countdownTimer?.invalidate()
                timerLabel.text = "Done"
